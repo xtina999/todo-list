@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1 style="margin-left: 35px">
+    TODO list
+    <a href="{% url 'task:task-create' %}"
+        type="submit"
+         class="btn btn-primary float-right"
+        style="height: 40px">Add task
+      </a>
+  </h1>
+  <br>
+
+  {% if task_list %}
+    <ul>
+      {% for task in task_list %}
+        <table class="table">
+           <thead>
+              <tr>
+                <div class="content_task">
+                  <p class="title_task">
+                    <strong>{{ task.content }}</strong>
+
+                    {% if task.is_completed %}
+                      <strong style="color: green">Done</strong>
+                      <form action="{% url 'task:task-undo' pk=task.id %}" method="POST" style="display: inline;">
+                          {% csrf_token %}
+                          <button type="submit" class="btn btn-secondary float-right" style="height: 40px">Undo</button>
+                      </form>
+                  {% else %}
+                      <strong style="color: red">Not done</strong>
+                      <form action="{% url 'task:task-complete' pk=task.id %}" method="POST" style="display: inline;">
+                          {% csrf_token %}
+                          <button type="submit" class="btn btn-success float-right" style="height: 40px">Complete</button>
+                      </form>
+                  {% endif %}
+
+                   </p>
+                  <p style="font-size: 13px">
+                    Created: {{ task.created_at }}
+                    Deadline: {{ task.deadline }}
+                  </p>
+                  <p style="color: grey" class="tags">Tags:
+                    {% for tag in task.tags.all %}
+                        {{ tag.name }}
+                    {% endfor %}
+                    <a type="button"
+                        href="{% url 'task:task-update' pk=task.id %}">
+                        UPDATE
+                    </a>
+                    <a type="button"
+                      href="{% url 'task:task-delete' pk=task.id %}">
+                      DELETE
+                    </a>
+                  </p>
+                </div>
+              </tr>
+           </thead>
+        <hr style="border-top: 1px solid gray;">
+        </table>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>There are no task in todo list</p>
+  {% endif %}
+{% endblock %}
