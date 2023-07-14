@@ -1,0 +1,34 @@
+body {
+    margin-top: 20px;
+}
+.detail {
+    font-size: 12px;
+}
+.tags {
+  color: grey;
+}
+.date {
+    font-size: 13px;
+}
+.title_task{
+    margin-bottom: 0px;
+    font-size: 20px;
+}
+
+.read-more-btn {
+    display: inline;
+    margin-top: 10px;
+    color: olivedrab;
+}
+
+.pagination {
+    margin-left: 40px;
+}
+
+.update_color_btn {
+    font-family: cursive;
+    color: black;
+    background-color: lightsteelblue;
+    padding: 8px;
+    border: 1px solid #ddd;
+}
