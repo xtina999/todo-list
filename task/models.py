@@ -1,3 +1,23 @@
 from django.db import models
 
-# Create your models here.
+
+class Tag(models.Model):
+    name = models.CharField(max_length=63)
+
+    def __str__(self):
+        return self.name
+
+
+class Task(models.Model):
+    content = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    deadline = models.DateField(null=True, blank=True)
+    is_completed = models.BooleanField(default=False)
+    tags = models.ForeignKey(
+        Tag,
+        on_delete=models.CASCADE,
+        related_name="tasks"
+    )
+
+    def __str__(self):
+        return self.content
