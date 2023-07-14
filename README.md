@@ -1,4 +1,4 @@
-![Logo of the project](static/favicon.ico)
+![Logo of the project](img/icon.png)
 # TODO LIST
 ![home](img/1.png)
 ![home](img/5.png)
